@@ -1,0 +1,122 @@
+.main .item {
+  margin:1rem;
+  padding: 0.5rem;
+}
+
+.main .item:hover {
+  background-color: #ffcf46;
+}
+
+
+.main .item .item-img img {
+  max-width: 100%;
+}
+
+.main .item .item-des {
+  text-align: center;
+}
+
+.main .item .item-des .name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.main .item .item-des .size {
+  margin: 0.5rem 0;
+}
+
+.main .item .item-des .add-cart {
+  width: 100%;
+}
+
+.pizza-area {
+  min-height: 550px;
+}
+
+.loading-area {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.book-items {
+  font-size: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.book-items:hover {
+  background-color: #ffcf46;
+  color: #fff;
+}
+
+.book-items .img-list img{
+  width: 80px;
+}
+
+.book-items .remove-list {
+  text-align: right;
+  color: red;
+}
+
+.book-items .remove-list i{
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.total-list {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.fee-list {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+#orderForm #order-btn {
+  width: 100%;
+}
+
+#orderForm #fee-btn {
+  width: 100%;
+}
+
+.err-msg {
+  color: #ff4d4f;
+}
+
+.loading-area {
+  margin-top: 1rem
+}
+
+.loading-area span:first-child {
+  font-size: 3rem;
+}
+
+.order-order-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.order-order-item .order-order-img img {
+  width: 100px;
+  height: 70px;
+}
+
+.booked-items-list .ant-spin-container ul.ant-list-items {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.order-items-panel .ant-spin-container ul.ant-list-items {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+ul.ant-list-items {
+  max-height: 400px;
+  overflow-y: auto;
+}

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon should take a snapshot 1`] = `
+<DocumentFragment>
+  <i
+    class="las test"
+    data-testid="icon"
+  />
+</DocumentFragment>
+`;

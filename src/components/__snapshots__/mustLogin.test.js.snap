@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mustLogin should take a snapshot 1`] = `
+<DocumentFragment>
+  <h1>
+    You need to login to see this feature
+  </h1>
+</DocumentFragment>
+`;

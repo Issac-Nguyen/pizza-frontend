@@ -1,0 +1,70 @@
+@import '~antd/dist/antd.css';
+
+.main-layout .header {
+    background-color: red;
+    color: #fff;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-layout .header .logo h1{
+    color: #fff;
+    margin:0
+}
+
+.main-layout .header .navigation ul{
+    margin: 0;
+    list-style-type: none;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.main-layout .header .navigation ul li {
+    display: inline-block;
+    margin: 0 0.5rem;   
+    position: relative;
+}
+
+.main-layout .header .navigation ul li a {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.cart-ico {
+    z-index: 1000;
+    position: absolute;
+    border: 1px solid red;
+    border-radius: 50%;
+    right: 10px;
+    top: 100px;
+}
+
+.cart-ico i {
+    font-size: 2.5rem;
+    color: red;
+}
+
+.cart-ico:hover {
+    background-color: red;
+}
+.cart-ico i:hover {
+    color: #fff;
+    
+}
+
+.user-logout {
+    position: relative;
+    right: -140px;
+}
+
+.user-logout a {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+}

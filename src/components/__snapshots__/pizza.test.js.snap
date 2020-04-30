@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pizza should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="ant-col ant-col-5 item"
+    id="1"
+  >
+    <div
+      class="item-img"
+    >
+      <img
+        src="http://google.com"
+      />
+    </div>
+    <div
+      class="item-des"
+    >
+      <div
+        class="name"
+      >
+        pizza 1
+      </div>
+      <div
+        class="price"
+      >
+        $10
+      </div>
+      <button
+        class="ant-btn add-cart ant-btn-danger"
+        type="button"
+      >
+        <span>
+          Add to cart
+        </span>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

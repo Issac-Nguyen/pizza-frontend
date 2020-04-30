@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PizzaList should take a snapshot with pizza has length 1`] = `
+<DocumentFragment>
+  <div
+    class="ant-row pizza-area"
+  >
+    <div>
+      pizza
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PizzaList should take a snapshot with pizza has no length 1`] = `
+<DocumentFragment>
+  <div
+    class="ant-row pizza-area"
+  />
+</DocumentFragment>
+`;
