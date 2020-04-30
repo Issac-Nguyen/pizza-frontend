@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import Icon from './Icon'
 import {closeCart, clearCart, addOrder} from '../actions/userActions';
-import {removeBookAction} from '../actions/orderActions'
+import {removeBookAction, bookAction} from '../actions/orderActions'
 import * as _ from 'lodash'
 import sendOrderService from '../services/sendOrderService';
 import feeService from '../services/getFeeService';
@@ -20,6 +20,17 @@ function range(start, end) {
 }
 
 export const PizzaBookItem = (props) => {
+
+  const addBook = e => {
+    const pizzaInfo = {
+      id: props.id,
+      name: props.name,
+      url: props.url,
+      price: props.price,
+      currency: props.currency
+  }
+  props.addBook(pizzaInfo);
+  }
     return (
         <Row className="book-items">
             <Col span={6} className="img-list">
@@ -34,7 +45,10 @@ export const PizzaBookItem = (props) => {
             <Col span={5} className="price-list">
                 ${props.number * props.price}
             </Col>
-            <Col span={3} className="remove-list">
+            <Col span={2} className="plus-list">
+                <Icon name="la-plus" onClick={addBook}/>
+            </Col>
+            <Col span={1} className="remove-list">
                 <Icon name="la-trash-alt" onClick={event => {props.removeAction(props.id)}}/>
             </Col>
         </Row>
@@ -151,9 +165,12 @@ export const DrawerCart = (props) => {
       };
       
     const bookItemsRender = _.groupBy(props.bookItems, 'id')
-    const uniqBookItems = _.uniqBy(props.bookItems, 'id').map(p => {
+    let uniqBookItems = _.uniqBy(props.bookItems, 'id').map(p => {
       return {...p, number: bookItemsRender[p.id].length}
     });
+
+    uniqBookItems = uniqBookItems.sort((a, b) => a.id - b.id)
+
 
     const footerList = (
       <div>
@@ -188,7 +205,7 @@ export const DrawerCart = (props) => {
                 footer={footerList}
             bordered
             dataSource={uniqBookItems}
-            renderItem={item => <PizzaBookItem {...item} removeAction={props.removeBook}/>}
+            renderItem={item => <PizzaBookItem {...item} removeAction={props.removeBook} addBook={props.addBook}/>}
             className="booked-items-list"
             />
             <Divider orientation="left">Order Information</Divider>
@@ -305,7 +322,8 @@ const mapDispatchToProps = dispatch => ({
     closeCart: () => {dispatch(closeCart())},
     removeBook: id => {dispatch(removeBookAction(id))},
     clearCart: () => {dispatch(clearCart())},
-    addOrder: (order) => {dispatch(addOrder(order))}
+    addOrder: (order) => {dispatch(addOrder(order))},
+    addBook: (bookItem) => {dispatch(bookAction(bookItem))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrawerCart);

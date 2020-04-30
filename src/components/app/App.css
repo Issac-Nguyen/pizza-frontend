@@ -60,6 +60,11 @@
   color: red;
 }
 
+.book-items .plus-list {
+  text-align: right;
+  color: green;
+}
+
 .book-items .remove-list i{
   font-size: 1.2rem;
   cursor: pointer;
