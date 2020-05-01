@@ -52,7 +52,7 @@ const App = (props) => {
             <Spin spinning={sending}/>
           </Row>
           <Row justify="end" className="show-currency">
-          Change currency: <Select defaultValue="usd" style={{ width: 120, margin: '0 1rem' }} onChange={props.changeCurrency}>
+          Change currency: <Select defaultValue="usd" value={props.showCurrency} style={{ width: 120, margin: '0 1rem' }} onChange={props.changeCurrency}>
             <Option value="usd">USD</Option>
             <Option value="eur">EUR</Option>
           </Select>
@@ -70,7 +70,7 @@ const App = (props) => {
 }
 
 const mapStateToProps = state => ({
-  ...state
+  showCurrency: state.showCurrency
  })
 
 const mapDispatchToProps = dispatch => ({
