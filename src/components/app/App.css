@@ -29,6 +29,12 @@
   width: 100%;
 }
 
+.show-currency {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+}
+
 .pizza-area {
   min-height: 550px;
 }

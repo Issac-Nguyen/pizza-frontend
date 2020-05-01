@@ -13,6 +13,13 @@ export const removeBookAction = (id) => (
     }
 )
 
+export const removeAllItemBookAction = (id) => (
+    {
+        type: ORDERACTIONS.REMOVEITEMBOOK,
+        payload: id
+    }
+)
+
 export const orderAction = (orderInfo) => (
     {
      type: ORDERACTIONS.ORDER,

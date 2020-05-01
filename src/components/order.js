@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Row, Col, Collapse, List, Divider, Alert} from 'antd'
 import * as _ from 'lodash'
 import {format} from 'date-fns'
+import Currency from './currency'
 
 const { Panel } = Collapse;
 
@@ -20,7 +21,7 @@ export const Order = (props) => {
                     <Row className="order-order-item">
                         <Col span={6} className="order-order-img"><img src={item.url} /></Col>
                         <Col span={6}>{item.name}</Col>
-                        <Col span={6}>${item.price}</Col>
+                        <Col span={6}><Currency usd={item.price} eur={item.priceEUR} showCurrency={props.showCurrency} showFull={true} /></Col>
                     </Row>
                 )}
     />
@@ -42,7 +43,7 @@ export const Order = (props) => {
                 Delivery: {order.schedule}
             </Col>
             <Col span={4}>
-            {`Total: $${order.total} (Eur ${(order.total * props.rate).toFixed(2)})`}
+            Total: &nbsp; <Currency usd={order.totalUSD} eur={order.totalEUR} showCurrency={props.showCurrency} showFull={true} />
             </Col>
         </Row>
 
@@ -87,6 +88,6 @@ export const Order = (props) => {
 const mapStateToProps = state => ({
     login: state.login,
     order: state.order,
-    rate: state.rate
+    showCurrency: state.showCurrency
 })
 export default connect(mapStateToProps)(Order);

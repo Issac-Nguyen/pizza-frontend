@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import {Row, Col, message, Spin, Pagination} from 'antd';
+import {Row, Col, message, Spin, Pagination, Select} from 'antd';
 import './App.css';
 import PizzaList from '../pizzaList';
 import Cart from '../cart';
+import {changeCurrency} from '../../actions/userActions'
 import getAllPizzasService from '../../services/getAllPizzasService'
 
-function App() {
+const { Option } = Select;
+
+const App = (props) => {
 
   let [pizzas, setPizzas] = useState([]); 
   let [sending, setSending] = useState(false);
@@ -48,6 +51,12 @@ function App() {
           <Row justify="center" className="loading-area">
             <Spin spinning={sending}/>
           </Row>
+          <Row justify="end" className="show-currency">
+          Change currency: <Select defaultValue="usd" style={{ width: 120, margin: '0 1rem' }} onChange={props.changeCurrency}>
+            <Option value="usd">USD</Option>
+            <Option value="eur">EUR</Option>
+          </Select>
+          </Row>
             <PizzaList pizzas={pizzas}/>
          
           <Row justify={"end"}>
@@ -64,5 +73,9 @@ const mapStateToProps = state => ({
   ...state
  })
 
+const mapDispatchToProps = dispatch => ({
+  changeCurrency: curr => {dispatch(changeCurrency(curr))}
+})
 
-export default connect(mapStateToProps) (App);
+
+export default connect(mapStateToProps, mapDispatchToProps) (App);

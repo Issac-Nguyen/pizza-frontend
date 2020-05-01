@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import Icon from './Icon'
 import {closeCart, clearCart, addOrder} from '../actions/userActions';
-import {removeBookAction, bookAction} from '../actions/orderActions'
+import {removeBookAction, bookAction, removeAllItemBookAction} from '../actions/orderActions'
 import * as _ from 'lodash'
 import sendOrderService from '../services/sendOrderService';
 import feeService from '../services/getFeeService';
 import moment from 'moment'
 import { set } from 'date-fns';
+import Currency from './currency';
 
 function range(start, end) {
   const result = [];
@@ -27,7 +28,7 @@ export const PizzaBookItem = (props) => {
       name: props.name,
       url: props.url,
       price: props.price,
-      currency: props.currency
+      priceEUR: props.priceEUR
   }
   props.addBook(pizzaInfo);
   }
@@ -45,11 +46,14 @@ export const PizzaBookItem = (props) => {
             <Col span={5} className="price-list">
                 ${props.number * props.price}
             </Col>
-            <Col span={2} className="plus-list">
+            <Col span={1} className="plus-list">
                 <Icon name="la-plus" onClick={addBook}/>
             </Col>
             <Col span={1} className="remove-list">
-                <Icon name="la-trash-alt" onClick={event => {props.removeAction(props.id)}}/>
+                <Icon name="la-minus" onClick={event => {props.removeAction(props.id)}}/>
+            </Col>
+            <Col span={1} className="remove-list">
+                <Icon name="la-trash-alt" onClick={event => {props.removeAllItemBookAction(props.id)}}/>
             </Col>
         </Row>
     )
@@ -80,14 +84,18 @@ const layout = {
 export const DrawerCart = (props) => {
     let [imme, setImme] = useState(true);
     let [sending, setSending] = useState(false);
-    let [fee, setFee] = useState(0);
+    let [fee, setFee] = useState({feeUSD: 0, feeEUR: 0});
     let [gotFee, setGotFee] = useState(false)
     let [enableBtn, setEnableBtn] = useState({fee: true, order: false});
-    
-    let total = props.bookItems?.reduce((total, i) => (total + i.price), 0);
-    total += fee;
-    total = total.toFixed(2);
-    const totalText = props.bookItems?.length > 0 ? '$' + total + '(' + 'Eur' + (total * props.rate).toFixed(2) + ')': '';
+    let totalUSD;
+    let totalEUR;
+    totalUSD = props.bookItems?.reduce((totalUSD, i) => (totalUSD + i.price), 0);
+      totalEUR = props.bookItems?.reduce((totalEUR, i) => (totalEUR + i.priceEUR), 0);
+      
+      totalUSD += fee.feeUSD;
+      totalUSD = totalUSD.toFixed(2);
+      totalEUR += fee.feeEUR;
+      totalEUR = totalEUR.toFixed(2);
 
     useEffect(() => {
     //enable button
@@ -111,7 +119,7 @@ export const DrawerCart = (props) => {
             return
           } else {
             setGotFee(true)
-            setFee(parseFloat(res.data.data.fee));
+            setFee({feeUSD: parseFloat(res.data.data.feeUSD), feeEUR: parseFloat(res.data.data.feeEUR)});
             setEnableBtn({fee: false, order: props.bookItems?.length == 0 ? false : true})
           }
         })
@@ -131,7 +139,7 @@ export const DrawerCart = (props) => {
         
         const bookItems = _.cloneDeep(props.bookItems).map(p => {delete p.bookId; return {...p, pizza_id: p.id}});
 
-        const payload = {...values, email: props.user, order_items: bookItems, total, fee, created_at: new Date().getTime()};
+        const payload = {...values, email: props.user, order_items: bookItems, totalUSD, totalEUR, feeUSD: fee.feeUSD, feeEUR: fee.feeEUR, created_at: new Date().getTime()};
         setSending(true)
         //send order request
         sendOrderService(payload).then(res => {
@@ -174,8 +182,8 @@ export const DrawerCart = (props) => {
 
     const footerList = (
       <div>
-        <div className="fee-list">{'Fee ' + '$' + fee}</div>
-        <div className="total-list">{'Total ' + totalText}</div>
+        <div className="fee-list">Fee: &nbsp; <Currency usd={fee.feeUSD} eur={fee.feeEUR} showCurrency={props.showCurrency} showFull={true} /></div>
+        <div className="total-list">Total: &nbsp;<Currency usd={totalUSD} eur={totalEUR} showCurrency={props.showCurrency} showFull={true} /></div>
       </div>
     )
 
@@ -205,7 +213,8 @@ export const DrawerCart = (props) => {
                 footer={footerList}
             bordered
             dataSource={uniqBookItems}
-            renderItem={item => <PizzaBookItem {...item} removeAction={props.removeBook} addBook={props.addBook}/>}
+            renderItem={item => <PizzaBookItem {...item} removeAction={props.removeBook} addBook={props.addBook}
+            removeAllItemBookAction={props.removeAllItemBookAction}/>}
             className="booked-items-list"
             />
             <Divider orientation="left">Order Information</Divider>
@@ -315,12 +324,13 @@ const mapStateToProps = state => ({
     bookItems: state.book,
     showCart: state.showCart,
     user: state.user,
-    rate: state.rate
+    showCurrency: state.showCurrency
 });
 
 const mapDispatchToProps = dispatch => ({
     closeCart: () => {dispatch(closeCart())},
     removeBook: id => {dispatch(removeBookAction(id))},
+    removeAllItemBookAction: id => {dispatch(removeAllItemBookAction(id))},
     clearCart: () => {dispatch(clearCart())},
     addOrder: (order) => {dispatch(addOrder(order))},
     addBook: (bookItem) => {dispatch(bookAction(bookItem))}

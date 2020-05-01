@@ -28,7 +28,23 @@ exports[`PizzaBookItem should take a snapshot 1`] = `
       $10
     </div>
     <div
-      class="ant-col ant-col-3 remove-list"
+      class="ant-col ant-col-1 plus-list"
+    >
+      <i
+        class="las la-plus"
+        data-testid="icon"
+      />
+    </div>
+    <div
+      class="ant-col ant-col-1 remove-list"
+    >
+      <i
+        class="las la-minus"
+        data-testid="icon"
+      />
+    </div>
+    <div
+      class="ant-col ant-col-1 remove-list"
     >
       <i
         class="las la-trash-alt"

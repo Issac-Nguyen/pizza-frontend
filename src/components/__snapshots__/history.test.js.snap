@@ -31,8 +31,8 @@ exports[`History should take a snapshot with login 1`] = `
                   placeholder="Select date"
                   readonly=""
                   size="12"
-                  title="2020/04/29"
-                  value="2020/04/29"
+                  title="2020/05/01"
+                  value="2020/05/01"
                 />
                 <span
                   class="ant-picker-suffix"

@@ -8,6 +8,7 @@ import {Row, Col, Collapse, List, message, DatePicker, Divider, Alert, Spin } fr
 import * as _ from 'lodash'
 import moment from 'moment';
 import {logout} from '../actions/userActions'
+import Currency from './currency'
 
 const { Panel } = Collapse;
 
@@ -65,7 +66,7 @@ export const History = (props) => {
                     <Row className="order-order-item">
                         <Col span={6} className="order-order-img"><img src={item.url} /></Col>
                         <Col span={6}>{item.name}</Col>
-                        <Col span={6}>${item.price}</Col>
+                        <Col span={6}><Currency usd={item.price} eur={item.priceEUR} showCurrency={props.showCurrency} showFull={true} /></Col>
                     </Row>
                 )}
     />
@@ -87,7 +88,7 @@ export const History = (props) => {
                 Delivery: {order.schedule}
             </Col>
             <Col span={4}>
-            {`Total: $${order.total} (Eur ${(order.total * props.rate).toFixed(2)})`}
+                Total: &nbsp; <Currency usd={order.totalUSD} eur={order.totalEUR} showCurrency={props.showCurrency} showFull={true} />
             </Col>
         </Row>
         const orderItems = resArr.filter(i => i.order_id == order.order_id);
@@ -98,10 +99,6 @@ export const History = (props) => {
                 </Panel>
             </Collapse>
         )
-    }
-
-    const disabledDate = (current) => {
-        return current < moment().startOf('day');
     }
 
     const onChangeDate = (date, dateString) => {
@@ -144,7 +141,7 @@ export const History = (props) => {
 const mapStateToProps = state => ({
     login: state.login,
     order: state.order,
-    rate: state.rate
+    showCurrency: state.showCurrency
 })
 
 const mapDispatchToProps = dispatch => ({

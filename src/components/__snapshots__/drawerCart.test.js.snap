@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`drawerCart should take a snapshot with bookItem has length 1`] = `<DocumentFragment />`;
-
-exports[`drawerCart should take a snapshot without bookitem 1`] = `<DocumentFragment />`;

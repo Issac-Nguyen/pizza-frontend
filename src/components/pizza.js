@@ -3,6 +3,7 @@ import {Row, Col, Select, Button} from 'antd';
 import { connect } from 'react-redux';
 import {bookAction} from '../actions/orderActions'
 import PropTypes from 'prop-types';
+import Currency from './currency'
 
 export const PizzaItem = (props) => {
     const addPizza = (e) => {
@@ -11,7 +12,7 @@ export const PizzaItem = (props) => {
             name: props.name,
             url: props.url,
             price: props.price,
-            currency: props.currency
+            priceEUR: props.priceEUR
         }
         props.book(pizzaInfo);
     }
@@ -26,7 +27,7 @@ export const PizzaItem = (props) => {
                     {props.name}
                 </div>
                 <div className="price">
-                    ${props.price}
+                    <Currency usd={props.price} eur={props.priceEUR}/>
                 </div>
                 <Button className="add-cart" type="danger" onClick={addPizza}>Add to cart</Button>
             </div>
@@ -38,7 +39,8 @@ PizzaItem.propTypes = {
     id: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
+    price: PropTypes.number.isRequired,
+    priceEUR: PropTypes.number.isRequired
 }
 
   

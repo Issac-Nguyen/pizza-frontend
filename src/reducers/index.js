@@ -7,7 +7,7 @@ export const defaultState = {
     showCart: false,
     login: false,
     showAuthenForm: false,
-    rate: 0.9
+    showCurrency: 'usd'
 }
 export default (state = defaultState, action) => {
     switch (action.type) {
@@ -53,6 +53,11 @@ export default (state = defaultState, action) => {
             ...state,
             book: state.book.filter(i => i.bookId != bookId)
         }
+    case ORDERACTIONS.REMOVEITEMBOOK:
+        return {
+            ...state,
+            book: state.book.filter(i => i.id !== action.payload)
+        }
     case USERACTIONS.REGISTER:
         var {email} = action.payload;
             return {
@@ -83,7 +88,13 @@ export default (state = defaultState, action) => {
                 ...state,
                 showAuthenForm: false
             }
-     default:
+    case USERACTIONS.CHANGE_CURRENCY:
+            return {
+                ...state,
+                showCurrency: action.payload
+            }
+    default:
       return state
     }
-   }
+}
+    

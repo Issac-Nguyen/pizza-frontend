@@ -55,3 +55,10 @@ export const addOrder = (order) => (
         payload: order
     }
 )
+
+export const changeCurrency = curr => (
+    {
+        type: USERACTIONS.CHANGE_CURRENCY,
+        payload: curr
+    }
+)
