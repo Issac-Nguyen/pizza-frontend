@@ -97,6 +97,9 @@ export const DrawerCart = (props) => {
       totalEUR += fee.feeEUR;
       totalEUR = totalEUR.toFixed(2);
 
+      console.log('totalUSD', totalUSD)
+      console.log('totalEUR', totalEUR)
+
     useEffect(() => {
     //enable button
         if(sending) {
@@ -151,7 +154,7 @@ export const DrawerCart = (props) => {
             props.closeCart();
             props.clearCart();
             props.addOrder({...payload})
-            setFee(0)
+            setFee({feeUSD: 0, feeEUR: 0})
             message.success('Pizza ordered successfully')
           }
         })

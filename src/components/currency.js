@@ -6,6 +6,7 @@ export const Currency = ({usd, eur, showCurrency, showFull}) => {
     console.log('eur', eur)
     console.log('showCurrency', showCurrency)
     const fullTextCurrency = (usd && eur) ? showCurrency == 'usd' ? `$${usd} (EUR ${eur})` : `EUR ${eur} ($${usd})` : '';
+    console.log(fullTextCurrency)
     return(  <Fragment>
             {!showFull && <>
                 {showCurrency == 'usd' && (usd ? `$${usd}` : '')}
