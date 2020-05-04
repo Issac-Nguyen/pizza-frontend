@@ -97,8 +97,6 @@ export const DrawerCart = (props) => {
       totalEUR += fee.feeEUR;
       totalEUR = totalEUR.toFixed(2);
 
-      console.log('totalUSD', totalUSD)
-      console.log('totalEUR', totalEUR)
 
     useEffect(() => {
     //enable button

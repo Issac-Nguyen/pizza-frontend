@@ -56,17 +56,25 @@ export const History = (props) => {
     
 
     const renderOrderItem = (orderItems) => {
+        let items = _.uniqBy(orderItems, 'pizza_id');
+        items = items.map(i => {
+            const item = {...i};
+            const length = orderItems.filter(j => j.pizza_id === i.pizza_id).length;
+            item.number = length;
+            return item;
+        })
         return (
             <List
                 header={<div>Booked pizzas</div>}
                 footer={<div></div>}
                 bordered
-                dataSource={orderItems}
+                dataSource={items}
                 renderItem={item => (
                     <Row className="order-order-item">
                         <Col span={6} className="order-order-img"><img src={item.url} /></Col>
                         <Col span={6}>{item.name}</Col>
-                        <Col span={6}><Currency usd={item.price} eur={item.priceEUR} showCurrency={props.showCurrency} showFull={true} /></Col>
+                        <Col span={6}>{`${item.number} pizza${item.number > 1 ? 's' : ''}`}</Col>
+                        <Col span={6}><Currency usd={item.number * item.price} eur={item.number * item.priceEUR} showCurrency={props.showCurrency} showFull={true} /></Col>
                     </Row>
                 )}
     />

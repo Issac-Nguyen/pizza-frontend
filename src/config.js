@@ -1,4 +1,4 @@
 export default {
-    API: `/api`,
+    API: `http://localhost:8080/api`,
     keyJwt: 'authenJwt'
 }

@@ -33,7 +33,6 @@ export default (state = defaultState, action) => {
                 book: []
             }
     case USERACTIONS.ADD_ORDER:
-        console.log(state.order)
             return {
                 ...state,
                 order: state.order.concat([action.payload])
