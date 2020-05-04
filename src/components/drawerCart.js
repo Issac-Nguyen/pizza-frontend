@@ -153,6 +153,7 @@ export const DrawerCart = (props) => {
             props.clearCart();
             props.addOrder({...payload})
             setFee({feeUSD: 0, feeEUR: 0})
+            setGotFee(false)
             message.success('Pizza ordered successfully')
           }
         })
