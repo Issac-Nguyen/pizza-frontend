@@ -44,7 +44,7 @@ export const PizzaBookItem = (props) => {
                 {props.number} {props.number > 1 ? ' pizzas' : ' pizza'}
             </Col>
             <Col span={5} className="price-list">
-                ${props.number * props.price}
+                <Currency usd={props.number * props.price} eur={props.number * props.priceEUR} showFull={false}/>
             </Col>
             <Col span={1} className="plus-list">
                 <Icon name="la-plus" onClick={addBook}/>
